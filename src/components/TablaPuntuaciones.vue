@@ -13,9 +13,9 @@
       </thead>
       <tbody>
         <tr v-for="puntuacion in puntuaciones" :key="puntuacion.id">
-          <td>{{ puntuacion.idjugador }}</td>
-          <td>{{ puntuacion.Jugador ? puntuacion.Jugador.nombre : 'Desconocido' }}</td>
-          <td>{{ puntuacion.Palabra ? puntuacion.Palabra.palabra : 'Desconocida' }}</td>
+          <td>{{ puntuacion.id }}</td>
+          <td>{{ puntuacion.jugador || 'Desconocido' }}</td>
+          <td>{{ puntuacion.palabra || 'Desconocida' }}</td>
           <td>{{ puntuacion.intentos }}</td>
           <td>{{ puntuacion.fecha }}</td>
         </tr>
@@ -39,7 +39,7 @@ export default {
   methods: {
     async obtenerPuntuaciones() {
       try {
-        const response = await axios.get('http://tiusr15pl.cuc-carrera-ti.ac.cr/puntuaciones');
+        const response = await axios.get('http://localhost:3000/puntuaciones');
         console.log(response.data); 
         this.puntuaciones = response.data;
       } catch (error) {

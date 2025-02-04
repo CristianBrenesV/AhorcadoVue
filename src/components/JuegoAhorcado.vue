@@ -24,7 +24,6 @@
 
       <button v-if="terminado" @click="reiniciarJuego">Reiniciar Juego</button>
       
-      <button @click="volverAlMenu">Volver al Menú Principal</button>
     </div>
   </div>
 </template>
@@ -55,7 +54,7 @@ export default {
 
     async registrarJugador() {
       try {
-        const response = await axios.post('http://tiusr15pl.cuc-carrera-ti.ac.cr/registro', {
+        const response = await axios.post('http://localhost:3000/registro', {
           nombre: this.nombreJugador
         });
         this.jugadorId = response.data.jugador.id; 
@@ -68,7 +67,7 @@ export default {
 
     async obtenerPalabra() {
       try {
-        const response = await axios.get('http://tiusr15pl.cuc-carrera-ti.ac.cr/palabra');
+        const response = await axios.get('http://localhost:3000/palabra');
         this.palabra = response.data.palabra.toUpperCase();
         this.palabraId = response.data.id;  
         this.palabraOculta = this.palabra.split('').map(() => '_');
@@ -111,7 +110,7 @@ export default {
       try {
         const intentosRealizados = 6 - this.intentosRestantes;
 
-        await axios.post('http://tiusr15pl.cuc-carrera-ti.ac.cr/puntuacion', {
+        await axios.post('http://localhost:3000/puntuacion', {
           idjugador: this.jugadorId, 
           idpalabra: this.palabraId,   
           intentos: intentosRealizados, 
